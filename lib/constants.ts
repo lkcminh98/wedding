@@ -23,7 +23,7 @@ export const WEDDING_DATE = {
   minute: 0,
   // Chuỗi hiển thị
   fullDate: "05.04.2026",
-  dayOfWeek: "Thứ Hai",
+  dayOfWeek: "Chủ nhật",
   dayDisplay: "05",
   monthDisplay: "04",
   yearDisplay: "2026",
@@ -57,8 +57,9 @@ export const GROOM_ADDRESS = {
     line2: "Xã Lạng Giang",
     line3: "Tỉnh Bắc Ninh",
   },
-  mapUrl: "https://maps.app.goo.gl",
-  embedUrl: "https://www.google.com",
+  mapUrl: "https://maps.app.goo.gl/P5QWnFDiGS3EFeDRA",
+  embedUrl:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3716.372099640487!2d106.2769844762767!3d21.335813280391555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31356f4ee94c5ad1%3A0x1a5eb72b7408e84d!2zVOG6oXAgaMOzYSBUw6JtIEx5!5e0!3m2!1sen!2s!4v1773841606519!5m2!1sen!2s",
 };
 
 // Địa chỉ nhà gái - Bride's Family Address
@@ -73,8 +74,9 @@ export const BRIDE_ADDRESS = {
     line2: "Xã Lạng Giang",
     line3: "Tỉnh Bắc Ninh",
   },
-  mapUrl: "https://maps.app.goo.gl",
-  embedUrl: "https://www.google.com",
+  mapUrl: "https://maps.app.goo.gl/XCQ79ksdyJHUz7mo8",
+  embedUrl:
+    "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3716.207071211593!2d106.274008!3d21.342326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjHCsDIwJzMyLjQiTiAxMDbCsDE2JzI2LjQiRQ!5e0!3m2!1sen!2s!4v1773842090217!5m2!1sen!2s",
 };
 
 // Thông tin chuyển khoản nhà trai - Groom's Bank Info

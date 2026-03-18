@@ -64,7 +64,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-xs md:text-sm tracking-[0.3em] uppercase text-muted-foreground mt-12 mb-4"
+          className="text-xs md:text-sm tracking-[0.06em] md:tracking-[0.3em] md:uppercase text-muted-foreground mt-12 mb-4 leading-4 md:leading-6 whitespace-normal wrap-break-word"
         >
           {LABELS.inviteMessage1}
         </motion.p>
@@ -73,7 +73,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-xs md:text-sm tracking-[0.2em] uppercase text-muted-foreground"
+          className="text-xs md:text-sm tracking-[0.04em] md:tracking-[0.2em] md:uppercase text-muted-foreground leading-4 md:leading-6 whitespace-normal wrap-break-word"
         >
           {LABELS.inviteMessage2}
         </motion.p>
