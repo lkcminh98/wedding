@@ -28,7 +28,7 @@ export const WEDDING_DATE = {
   monthDisplay: "04",
   yearDisplay: "2026",
   // Âm lịch
-  lunarDay: "15",
+  lunarDay: "18",
   lunarMonth: "2",
   lunarYear: "Bính Ngọ",
 };
