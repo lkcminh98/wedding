@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import Image from "next/image"
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function VenueSection() {
   return (
@@ -28,7 +28,7 @@ export default function VenueSection() {
           <p className="text-xs tracking-[0.4em] uppercase text-background/70 mb-6">
             Lời Mời
           </p>
-          
+
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-light text-background mb-8 text-balance">
             Trân Trọng Kính Mời
           </h2>
@@ -36,9 +36,10 @@ export default function VenueSection() {
           <div className="w-16 h-px bg-background/40 mx-auto mb-10" />
 
           <p className="text-base md:text-lg text-background/90 leading-relaxed max-w-2xl mx-auto mb-8">
-            Với tất cả lòng biết ơn và sự trân trọng, hai gia đình chúng tôi xin kính mời 
-            quý khách đến chung vui trong ngày trọng đại của Bích và Minh. Sự hiện diện 
-            của quý khách sẽ là niềm vinh hạnh và hạnh phúc lớn lao của chúng tôi.
+            Với tất cả lòng biết ơn và sự trân trọng, hai gia đình chúng tôi xin
+            kính mời quý khách đến chung vui trong ngày trọng đại của Bích và
+            Minh. Sự hiện diện của quý khách sẽ là niềm vinh hạnh và hạnh phúc
+            lớn lao của chúng tôi.
           </p>
 
           <p className="text-base md:text-lg text-background/80 leading-relaxed max-w-2xl mx-auto">
@@ -58,11 +59,11 @@ export default function VenueSection() {
             Lưu Ý
           </h3>
           <p className="text-sm text-background/70 max-w-xl mx-auto">
-            Xin vui lòng xác nhận tham dự trước ngày 1 tháng 9 năm 2026 để chúng tôi 
-            chuẩn bị tiếp đón chu đáo nhất.
+            Xin vui lòng xác nhận tham dự trước ngày 1 tháng 4 năm 2026 để chúng
+            tôi chuẩn bị tiếp đón chu đáo nhất.
           </p>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
