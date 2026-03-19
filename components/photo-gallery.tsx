@@ -1,35 +1,37 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
-import { ChevronLeft, ChevronRight, X, Heart } from "lucide-react"
-import { PHOTOS, LABELS } from "@/lib/constants"
+import { useState } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, X, Heart } from "lucide-react";
+import { PHOTOS, LABELS } from "@/lib/constants";
+
+const isPhotoGalleryComingSoon = true;
 
 const photos = PHOTOS.map((photo, index) => ({
   src: photo.src,
   alt: photo.caption,
   caption: photo.caption,
-}))
+}));
 
 export default function PhotoGallery() {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const openLightbox = (index: number) => setSelectedIndex(index)
-  const closeLightbox = () => setSelectedIndex(null)
+  const openLightbox = (index: number) => setSelectedIndex(index);
+  const closeLightbox = () => setSelectedIndex(null);
 
   const goNext = () => {
     if (selectedIndex !== null) {
-      setSelectedIndex((selectedIndex + 1) % photos.length)
+      setSelectedIndex((selectedIndex + 1) % photos.length);
     }
-  }
+  };
 
   const goPrev = () => {
     if (selectedIndex !== null) {
-      setSelectedIndex((selectedIndex - 1 + photos.length) % photos.length)
+      setSelectedIndex((selectedIndex - 1 + photos.length) % photos.length);
     }
-  }
+  };
 
   return (
     <section className="py-24 md:py-32 px-4 bg-background relative overflow-hidden">
@@ -66,55 +68,110 @@ export default function PhotoGallery() {
           </p>
         </motion.div>
 
-        {/* Masonry-style gallery */}
-        <div className="grid grid-cols-12 gap-4 md:gap-6">
-          {/* Large featured photo */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="col-span-12 md:col-span-7 relative cursor-pointer group"
-            onClick={() => openLightbox(0)}
-            onMouseEnter={() => setHoveredIndex(0)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            <div className="relative h-[350px] md:h-[500px] overflow-hidden">
-              <Image
-                src={photos[0].src}
-                alt={photos[0].alt}
-                fill
-                className="object-cover transition-all duration-1000 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: hoveredIndex === 0 ? 1 : 0, y: hoveredIndex === 0 ? 0 : 20 }}
-                className="absolute bottom-0 left-0 right-0 p-6 md:p-8"
-              >
-                <p className="font-serif text-xl md:text-2xl text-background">{photos[0].caption}</p>
-              </motion.div>
-            </div>
-            <div className="absolute top-4 left-4 px-3 py-1 bg-background/90 text-foreground text-xs tracking-wider uppercase">
-              01
-            </div>
-          </motion.div>
+        {isPhotoGalleryComingSoon ? (
+          <div className="py-20 border border-dashed border-muted rounded-2xl bg-muted/40 text-center">
+            <p className="text-5xl font-bold tracking-widest text-foreground">
+              Coming soon
+            </p>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Album ảnh đang được hoàn thiện, vui lòng quay lại sau nhé!
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-12 gap-4 md:gap-6">
+            {/* Large featured photo */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="col-span-12 md:col-span-7 relative cursor-pointer group"
+              onClick={() => openLightbox(0)}
+              onMouseEnter={() => setHoveredIndex(0)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <div className="relative h-[350px] md:h-[500px] overflow-hidden">
+                <Image
+                  src={photos[0].src}
+                  alt={photos[0].alt}
+                  fill
+                  className="object-cover transition-all duration-1000 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{
+                    opacity: hoveredIndex === 0 ? 1 : 0,
+                    y: hoveredIndex === 0 ? 0 : 20,
+                  }}
+                  className="absolute bottom-0 left-0 right-0 p-6 md:p-8"
+                >
+                  <p className="font-serif text-xl md:text-2xl text-background">
+                    {photos[0].caption}
+                  </p>
+                </motion.div>
+              </div>
+              <div className="absolute top-4 left-4 px-3 py-1 bg-background/90 text-foreground text-xs tracking-wider uppercase">
+                01
+              </div>
+            </motion.div>
 
-          {/* Stacked photos */}
-          <div className="col-span-12 md:col-span-5 flex flex-col gap-4 md:gap-6">
-            {[1, 2].map((i) => (
+            {/* Stacked photos */}
+            <div className="col-span-12 md:col-span-5 flex flex-col gap-4 md:gap-6">
+              {[1, 2].map((i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="relative cursor-pointer group flex-1"
+                  onClick={() => openLightbox(i)}
+                  onMouseEnter={() => setHoveredIndex(i)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  <div className="relative h-[170px] md:h-full min-h-[170px] overflow-hidden">
+                    <Image
+                      src={photos[i].src}
+                      alt={photos[i].alt}
+                      fill
+                      className="object-cover transition-all duration-1000 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{
+                        opacity: hoveredIndex === i ? 1 : 0,
+                        y: hoveredIndex === i ? 0 : 20,
+                      }}
+                      className="absolute bottom-0 left-0 right-0 p-4 md:p-6"
+                    >
+                      <p className="font-serif text-lg text-background">
+                        {photos[i].caption}
+                      </p>
+                    </motion.div>
+                  </div>
+                  <div className="absolute top-4 left-4 px-3 py-1 bg-background/90 text-foreground text-xs tracking-wider uppercase">
+                    0{i + 1}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Bottom row - three equal photos */}
+            {[3, 4, 5].map((i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
+                transition={{ duration: 0.6, delay: (i - 2) * 0.1 }}
                 viewport={{ once: true }}
-                className="relative cursor-pointer group flex-1"
+                className="col-span-12 sm:col-span-6 md:col-span-4 relative cursor-pointer group"
                 onClick={() => openLightbox(i)}
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="relative h-[170px] md:h-full min-h-[170px] overflow-hidden">
+                <div className="relative h-[280px] md:h-[320px] overflow-hidden">
                   <Image
                     src={photos[i].src}
                     alt={photos[i].alt}
@@ -124,10 +181,15 @@ export default function PhotoGallery() {
                   <div className="absolute inset-0 bg-linear-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: hoveredIndex === i ? 1 : 0, y: hoveredIndex === i ? 0 : 20 }}
+                    animate={{
+                      opacity: hoveredIndex === i ? 1 : 0,
+                      y: hoveredIndex === i ? 0 : 20,
+                    }}
                     className="absolute bottom-0 left-0 right-0 p-4 md:p-6"
                   >
-                    <p className="font-serif text-lg text-background">{photos[i].caption}</p>
+                    <p className="font-serif text-lg text-background">
+                      {photos[i].caption}
+                    </p>
                   </motion.div>
                 </div>
                 <div className="absolute top-4 left-4 px-3 py-1 bg-background/90 text-foreground text-xs tracking-wider uppercase">
@@ -136,42 +198,7 @@ export default function PhotoGallery() {
               </motion.div>
             ))}
           </div>
-
-          {/* Bottom row - three equal photos */}
-          {[3, 4, 5].map((i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: (i - 2) * 0.1 }}
-              viewport={{ once: true }}
-              className="col-span-12 sm:col-span-6 md:col-span-4 relative cursor-pointer group"
-              onClick={() => openLightbox(i)}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              <div className="relative h-[280px] md:h-[320px] overflow-hidden">
-                <Image
-                  src={photos[i].src}
-                  alt={photos[i].alt}
-                  fill
-                  className="object-cover transition-all duration-1000 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: hoveredIndex === i ? 1 : 0, y: hoveredIndex === i ? 0 : 20 }}
-                  className="absolute bottom-0 left-0 right-0 p-4 md:p-6"
-                >
-                  <p className="font-serif text-lg text-background">{photos[i].caption}</p>
-                </motion.div>
-              </div>
-              <div className="absolute top-4 left-4 px-3 py-1 bg-background/90 text-foreground text-xs tracking-wider uppercase">
-                0{i + 1}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        )}
 
         {/* Decorative quote */}
         <motion.div
@@ -208,7 +235,10 @@ export default function PhotoGallery() {
             {/* Navigation */}
             <button
               className="absolute left-4 md:left-8 text-background/60 hover:text-background transition-colors p-2 z-10"
-              onClick={(e) => { e.stopPropagation(); goPrev() }}
+              onClick={(e) => {
+                e.stopPropagation();
+                goPrev();
+              }}
             >
               <ChevronLeft className="w-10 h-10 md:w-14 md:h-14" />
             </button>
@@ -244,7 +274,10 @@ export default function PhotoGallery() {
 
             <button
               className="absolute right-4 md:right-8 text-background/60 hover:text-background transition-colors p-2 z-10"
-              onClick={(e) => { e.stopPropagation(); goNext() }}
+              onClick={(e) => {
+                e.stopPropagation();
+                goNext();
+              }}
             >
               <ChevronRight className="w-10 h-10 md:w-14 md:h-14" />
             </button>
@@ -254,9 +287,15 @@ export default function PhotoGallery() {
               {photos.map((_, i) => (
                 <button
                   key={i}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${i === selectedIndex ? "bg-background w-6" : "bg-background/40 hover:bg-background/60"
-                    }`}
-                  onClick={(e) => { e.stopPropagation(); setSelectedIndex(i) }}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    i === selectedIndex
+                      ? "bg-background w-6"
+                      : "bg-background/40 hover:bg-background/60"
+                  }`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedIndex(i);
+                  }}
                 />
               ))}
             </div>
@@ -264,7 +303,8 @@ export default function PhotoGallery() {
         )}
       </AnimatePresence>
     </section>
-  )
+  );
 }
 
-const LOVE_STORY_QUOTE = "Yêu là khi mọi khoảnh khắc bên nhau đều trở nên vĩnh cửu"
+const LOVE_STORY_QUOTE =
+  "Yêu là khi mọi khoảnh khắc bên nhau đều trở nên vĩnh cửu";
