@@ -69,11 +69,11 @@ export default function PhotoGallery() {
         </motion.div>
 
         {isPhotoGalleryComingSoon ? (
-          <div className="py-20 border border-dashed border-muted rounded-2xl bg-muted/40 text-center">
-            <p className="text-5xl font-bold tracking-widest text-foreground">
+          <div className="py-12 md:py-20 px-4 md:px-10 border border-dashed border-muted rounded-2xl bg-muted/40 text-center max-w-3xl mx-auto">
+            <p className="text-3xl md:text-5xl font-bold tracking-widest text-foreground">
               Coming soon
             </p>
-            <p className="mt-4 text-lg text-muted-foreground">
+            <p className="mt-3 text-base md:text-lg text-muted-foreground">
               Album ảnh đang được hoàn thiện, vui lòng quay lại sau nhé!
             </p>
           </div>
