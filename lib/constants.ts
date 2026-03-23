@@ -23,6 +23,7 @@ export const WEDDING_DATE = {
   minute: 0,
   // Chuỗi hiển thị
   fullDate: "05.04.2026",
+  setupDate: "04.04.2026",
   dayOfWeek: "Chủ nhật",
   dayDisplay: "05",
   monthDisplay: "04",
@@ -35,14 +36,14 @@ export const WEDDING_DATE = {
 
 // Thời gian tiệc - Event Times
 export const EVENT_TIMES = {
-  vuQuy: "08:00",
-  vuQuyLabel: "8:00 sáng",
-  groomCeremony: "10:00",
-  groomCeremonyLabel: "10:00 sáng",
-  brideReception: "11:00",
-  brideReceptionLabel: "11:00 trưa",
-  groomReception: "17:00",
-  groomReceptionLabel: "17:00 chiều",
+  vuQuy: "10:00",
+  vuQuyLabel: "10:00 sáng",
+  groomCeremony: "11:30",
+  groomCeremonyLabel: "11:30 sáng",
+  brideReception: "16:00",
+  brideReceptionLabel: "16:00",
+  groomReception: "16:00",
+  groomReceptionLabel: "16:00",
 };
 
 // Địa chỉ nhà trai - Groom's Family Address

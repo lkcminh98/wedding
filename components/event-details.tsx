@@ -1,15 +1,23 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { CalendarDays, Clock, MapPin, Utensils } from "lucide-react"
-import { useEffect, useState } from "react"
-import { WEDDING_DATE, EVENT_TIMES, LABELS, getWeddingDateISO } from "@/lib/constants"
+import { motion } from "framer-motion";
+import { CalendarDays, Clock, MapPin, Utensils } from "lucide-react";
+import { useEffect, useState } from "react";
+import {
+  WEDDING_DATE,
+  EVENT_TIMES,
+  LABELS,
+  getWeddingDateISO,
+} from "@/lib/constants";
 
 const events = [
   {
     icon: CalendarDays,
     title: LABELS.weddingDay,
-    details: [`${WEDDING_DATE.dayOfWeek}, ${WEDDING_DATE.dayDisplay} tháng ${WEDDING_DATE.monthDisplay}`, `Năm ${WEDDING_DATE.yearDisplay}`],
+    details: [
+      `${WEDDING_DATE.dayOfWeek}, ${WEDDING_DATE.dayDisplay} tháng ${WEDDING_DATE.monthDisplay}`,
+      `Năm ${WEDDING_DATE.yearDisplay}`,
+    ],
   },
   {
     icon: Clock,
@@ -19,14 +27,18 @@ const events = [
   {
     icon: Utensils,
     title: LABELS.reception,
-    details: [`${EVENT_TIMES.brideReceptionLabel} - ${LABELS.brideReception}`, `${EVENT_TIMES.groomReceptionLabel} - ${LABELS.groomReception}`],
+    details: [
+      "Ngày " + WEDDING_DATE.setupDate,
+      `${EVENT_TIMES.brideReceptionLabel} - ${LABELS.brideReception}`,
+      `${EVENT_TIMES.groomReceptionLabel} - ${LABELS.groomReception}`,
+    ],
   },
   {
     icon: MapPin,
     title: LABELS.ceremony,
     details: [EVENT_TIMES.groomCeremonyLabel, LABELS.atGroomHome],
   },
-]
+];
 
 export default function EventDetails() {
   return (
@@ -66,7 +78,10 @@ export default function EventDetails() {
               </h3>
 
               {event.details.map((detail, i) => (
-                <p key={i} className="text-sm text-muted-foreground leading-relaxed">
+                <p
+                  key={i}
+                  className="text-sm text-muted-foreground leading-relaxed"
+                >
                   {detail}
                 </p>
               ))}
@@ -86,7 +101,7 @@ export default function EventDetails() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
 
 function CountdownTimer() {
@@ -95,17 +110,17 @@ function CountdownTimer() {
     hours: 0,
     minutes: 0,
     seconds: 0,
-  })
-  const [mounted, setMounted] = useState(false)
+  });
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-    const weddingDateISO = getWeddingDateISO()
-    const weddingDate = new Date(weddingDateISO)
+    setMounted(true);
+    const weddingDateISO = getWeddingDateISO();
+    const weddingDate = new Date(weddingDateISO);
 
     const updateCountdown = () => {
-      const now = new Date()
-      const difference = weddingDate.getTime() - now.getTime()
+      const now = new Date();
+      const difference = weddingDate.getTime() - now.getTime();
 
       if (difference > 0) {
         setTimeLeft({
@@ -113,21 +128,21 @@ function CountdownTimer() {
           hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
           minutes: Math.floor((difference / 1000 / 60) % 60),
           seconds: Math.floor((difference / 1000) % 60),
-        })
+        });
       }
-    }
+    };
 
-    updateCountdown()
-    const timer = setInterval(updateCountdown, 1000)
-    return () => clearInterval(timer)
-  }, [])
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const timeUnits = [
     { value: timeLeft.days, label: LABELS.days },
     { value: timeLeft.hours, label: LABELS.hours },
     { value: timeLeft.minutes, label: LABELS.minutes },
     { value: timeLeft.seconds, label: LABELS.seconds },
-  ]
+  ];
 
   if (!mounted) {
     return (
@@ -143,7 +158,7 @@ function CountdownTimer() {
           </div>
         ))}
       </div>
-    )
+    );
   }
 
   return (
@@ -159,5 +174,5 @@ function CountdownTimer() {
         </div>
       ))}
     </div>
-  )
+  );
 }
