@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X, Heart } from "lucide-react";
 import { PHOTOS, LABELS } from "@/lib/constants";
 
-const isPhotoGalleryComingSoon = true;
+const isPhotoGalleryComingSoon = false;
 
 const photos = PHOTOS.map((photo, index) => ({
   src: photo.src,

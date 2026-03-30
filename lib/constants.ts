@@ -102,12 +102,12 @@ export const WEDDING_SOCIAL = {
 
 // Ảnh cưới - Wedding Photos
 export const PHOTOS = [
-  { src: "/images/couple-1.jpg", caption: "Lần đầu gặp gỡ" },
-  { src: "/images/couple-2.jpg", caption: "Khoảnh khắc hạnh phúc" },
-  { src: "/images/couple-3.jpg", caption: "Hoàng hôn lãng mạn" },
-  { src: "/images/couple-4.jpg", caption: "Nắm tay nhau" },
-  { src: "/images/couple-5.jpg", caption: "Khiêu vũ dưới trăng" },
-  { src: "/images/couple-6.jpg", caption: "Bên nhau mãi mãi" },
+  { src: "/images/c-1.jpeg", caption: "Lần đầu gặp gỡ" },
+  { src: "/images/c-2.jpeg", caption: "Khoảnh khắc hạnh phúc" },
+  { src: "/images/c-3.jpeg", caption: "Hoàng hôn lãng mạn" },
+  { src: "/images/c-4.jpeg", caption: "Nắm tay nhau" },
+  { src: "/images/c-5.jpeg", caption: "Khiêu vũ dưới trăng" },
+  { src: "/images/c-6.jpeg", caption: "Bên nhau mãi mãi" },
 ];
 
 // Câu chuyện tình yêu
@@ -221,11 +221,16 @@ export function getWeddingDate() {
     WEDDING_DATE.month - 1,
     WEDDING_DATE.day,
     WEDDING_DATE.hour,
-    WEDDING_DATE.minute,
+    WEDDING_DATE.minute
   );
 }
 
 // Hàm lấy chuỗi ngày ISO cho bộ đếm ngược
 export function getWeddingDateISO() {
-  return `${WEDDING_DATE.year}-${String(WEDDING_DATE.month).padStart(2, "0")}-${String(WEDDING_DATE.day).padStart(2, "0")}T${String(WEDDING_DATE.hour).padStart(2, "0")}:${String(WEDDING_DATE.minute).padStart(2, "0")}:00`;
+  return `${WEDDING_DATE.year}-${String(WEDDING_DATE.month).padStart(
+    2,
+    "0"
+  )}-${String(WEDDING_DATE.day).padStart(2, "0")}T${String(
+    WEDDING_DATE.hour
+  ).padStart(2, "0")}:${String(WEDDING_DATE.minute).padStart(2, "0")}:00`;
 }
