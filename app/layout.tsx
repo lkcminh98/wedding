@@ -21,6 +21,16 @@ export const metadata: Metadata = {
   generator: "v0.app",
   themeColor: "#ffffff",
   manifest: "/manifest.json",
+  openGraph: {
+    images: [
+      {
+        url: "https://minhbich.vercel.app/images/c-6.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Bích & Minh Wedding",
+      },
+    ],
+  },
   icons: {
     icon: [
       { url: "/android-icon-192x192.png", type: "image/png", sizes: "192x192" },
