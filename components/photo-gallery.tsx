@@ -226,7 +226,7 @@ export default function PhotoGallery() {
           >
             {/* Close button */}
             <button
-              className="absolute top-6 right-6 text-background/80 hover:text-background transition-colors z-10"
+              className="absolute top-4 right-4 md:top-6 md:right-6 text-background/80 hover:text-background transition-colors z-10"
               onClick={closeLightbox}
             >
               <X className="w-8 h-8" />
@@ -234,7 +234,7 @@ export default function PhotoGallery() {
 
             {/* Navigation */}
             <button
-              className="absolute left-4 md:left-8 text-background/60 hover:text-background transition-colors p-2 z-10"
+              className="absolute left-1 md:left-8 text-background/60 hover:text-background transition-colors p-2 z-10"
               onClick={(e) => {
                 e.stopPropagation();
                 goPrev();
@@ -250,7 +250,7 @@ export default function PhotoGallery() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.3 }}
-              className="relative w-full max-w-5xl h-[70vh] md:h-[85vh] mx-16"
+              className="relative w-full max-w-none sm:max-w-5xl h-[82vh] md:h-[85vh] mx-2 sm:mx-6 md:mx-16"
               onClick={(e) => e.stopPropagation()}
             >
               <Image
@@ -262,8 +262,8 @@ export default function PhotoGallery() {
               />
 
               {/* Caption */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                <p className="font-serif text-xl md:text-2xl text-background/90">
+              <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-6 text-center">
+                <p className="font-serif text-lg sm:text-xl md:text-2xl text-background/90">
                   {photos[selectedIndex].caption}
                 </p>
                 <p className="text-sm text-background/50 mt-2">
@@ -273,7 +273,7 @@ export default function PhotoGallery() {
             </motion.div>
 
             <button
-              className="absolute right-4 md:right-8 text-background/60 hover:text-background transition-colors p-2 z-10"
+              className="absolute right-1 md:right-8 text-background/60 hover:text-background transition-colors p-2 z-10"
               onClick={(e) => {
                 e.stopPropagation();
                 goNext();
