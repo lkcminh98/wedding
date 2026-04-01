@@ -3,16 +3,20 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, X, Heart } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Heart, Plus } from "lucide-react";
 import { PHOTOS, LABELS } from "@/lib/constants";
 
 const isPhotoGalleryComingSoon = false;
 
-const photos = PHOTOS.map((photo, index) => ({
+const photos = PHOTOS.map((photo) => ({
   src: photo.src,
   alt: photo.caption,
   caption: photo.caption,
 }));
+
+function photoNumberLabel(index: number) {
+  return String(index + 1).padStart(2, "0");
+}
 
 export default function PhotoGallery() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -77,8 +81,50 @@ export default function PhotoGallery() {
               Album ảnh đang được hoàn thiện, vui lòng quay lại sau nhé!
             </p>
           </div>
-        ) : (
+        ) : photos.length === 0 ? null : photos.length < 6 ? (
           <div className="grid grid-cols-12 gap-4 md:gap-6">
+            {photos.map((photo, i) => (
+              <motion.div
+                key={photo.src}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.08 }}
+                viewport={{ once: true }}
+                className="col-span-12 sm:col-span-6 md:col-span-4 relative cursor-pointer group"
+                onClick={() => openLightbox(i)}
+                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                <div className="relative h-[280px] md:h-[320px] overflow-hidden">
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    className="object-cover transition-all duration-1000 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{
+                      opacity: hoveredIndex === i ? 1 : 0,
+                      y: hoveredIndex === i ? 0 : 20,
+                    }}
+                    className="absolute bottom-0 left-0 right-0 p-4 md:p-6"
+                  >
+                    <p className="font-serif text-lg text-background">
+                      {photo.caption}
+                    </p>
+                  </motion.div>
+                </div>
+                <div className="absolute top-4 left-4 px-3 py-1 bg-background/90 text-foreground text-xs tracking-wider uppercase">
+                  {photoNumberLabel(i)}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-12 gap-4 md:gap-6">
             {/* Large featured photo */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -112,7 +158,7 @@ export default function PhotoGallery() {
                 </motion.div>
               </div>
               <div className="absolute top-4 left-4 px-3 py-1 bg-background/90 text-foreground text-xs tracking-wider uppercase">
-                01
+                {photoNumberLabel(0)}
               </div>
             </motion.div>
 
@@ -152,52 +198,77 @@ export default function PhotoGallery() {
                     </motion.div>
                   </div>
                   <div className="absolute top-4 left-4 px-3 py-1 bg-background/90 text-foreground text-xs tracking-wider uppercase">
-                    0{i + 1}
+                    {photoNumberLabel(i)}
                   </div>
                 </motion.div>
               ))}
             </div>
 
             {/* Bottom row - three equal photos */}
-            {[3, 4, 5].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: (i - 2) * 0.1 }}
-                viewport={{ once: true }}
-                className="col-span-12 sm:col-span-6 md:col-span-4 relative cursor-pointer group"
-                onClick={() => openLightbox(i)}
-                onMouseEnter={() => setHoveredIndex(i)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <div className="relative h-[280px] md:h-[320px] overflow-hidden">
-                  <Image
-                    src={photos[i].src}
-                    alt={photos[i].alt}
-                    fill
-                    className="object-cover transition-all duration-1000 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{
-                      opacity: hoveredIndex === i ? 1 : 0,
-                      y: hoveredIndex === i ? 0 : 20,
-                    }}
-                    className="absolute bottom-0 left-0 right-0 p-4 md:p-6"
-                  >
-                    <p className="font-serif text-lg text-background">
-                      {photos[i].caption}
-                    </p>
-                  </motion.div>
-                </div>
-                <div className="absolute top-4 left-4 px-3 py-1 bg-background/90 text-foreground text-xs tracking-wider uppercase">
-                  0{i + 1}
-                </div>
-              </motion.div>
-            ))}
+            {[3, 4, 5].map((i) => {
+              const moreCount = photos.length - 6;
+              const showViewMore = i === 5 && moreCount > 0;
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: (i - 2) * 0.1 }}
+                  viewport={{ once: true }}
+                  className="col-span-12 sm:col-span-6 md:col-span-4 relative cursor-pointer group"
+                  onClick={() =>
+                    showViewMore ? openLightbox(6) : openLightbox(i)
+                  }
+                  onMouseEnter={() => setHoveredIndex(i)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  <div className="relative h-[280px] md:h-[320px] overflow-hidden">
+                    <Image
+                      src={photos[i].src}
+                      alt={photos[i].alt}
+                      fill
+                      className="object-cover transition-all duration-1000 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    {showViewMore && (
+                      <div className="absolute inset-0 bg-foreground/50 flex flex-col items-center justify-center gap-2 pointer-events-none">
+                        <div className="flex items-center gap-1 text-background drop-shadow-sm">
+                          <Plus
+                            className="w-7 h-7 md:w-8 md:h-8"
+                            strokeWidth={2.5}
+                            aria-hidden
+                          />
+                          <span className="font-serif text-4xl md:text-5xl tabular-nums leading-none">
+                            {moreCount}
+                          </span>
+                        </div>
+                        <span className="text-[11px] md:text-xs tracking-[0.25em] uppercase text-background/95">
+                          Xem thêm
+                        </span>
+                      </div>
+                    )}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{
+                        opacity:
+                          hoveredIndex === i && !showViewMore ? 1 : 0,
+                        y: hoveredIndex === i && !showViewMore ? 0 : 20,
+                      }}
+                      className="absolute bottom-0 left-0 right-0 p-4 md:p-6"
+                    >
+                      <p className="font-serif text-lg text-background">
+                        {photos[i].caption}
+                      </p>
+                    </motion.div>
+                  </div>
+                  <div className="absolute top-4 left-4 px-3 py-1 bg-background/90 text-foreground text-xs tracking-wider uppercase">
+                    {photoNumberLabel(i)}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
+          </>
         )}
 
         {/* Decorative quote */}

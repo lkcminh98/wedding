@@ -108,6 +108,9 @@ export const PHOTOS = [
   { src: "/images/c-4.jpeg", caption: "Nắm tay nhau" },
   { src: "/images/c-5.jpeg", caption: "Khiêu vũ dưới trăng" },
   { src: "/images/c-6.jpeg", caption: "Bên nhau mãi mãi" },
+  { src: "/images/c-7.jpeg", caption: "Cùng nhau bước tiếp" },
+  { src: "/images/c-8.jpeg", caption: "Nụ cười mỗi ngày" },
+  { src: "/images/c-9.jpeg", caption: "Hành trình phía trước" },
 ];
 
 // Câu chuyện tình yêu
